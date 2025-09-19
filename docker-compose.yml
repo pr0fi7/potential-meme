@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  api:
+    image: items-api:latest
+    build:
+      context: .
+      dockerfile: Dockerfile      # <- ensure this file exists at the root
+      # DO NOT set a 'target:' unless your Dockerfile has that stage
+    ports:
+      - "8000:8000"
+    environment:
+      - ITEMS_DB=/data/items.db
+    volumes:
+      - dbdata:/data
+
+volumes:
+  dbdata:
